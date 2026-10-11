@@ -1,0 +1,36 @@
+$ "C:\Stack_AI_Rewire\Assignment_1\.venv\Scripts\python.exe" _registry_query.py
+
+=== feature_registry (all versions) ===
+       feature_name  version                       created_at                                                              description                                       source_columns                                                                                                 transform_summary                                                                                                     business_rationale                                           parameters                                         parquet_path  is_latest
+  active_months_12m        1 2026-10-11T01:00:39.805657+00:00               Count of active months in the trailing 12 calendar months.      data/transactions_monthly_agg.parquet:txn_month                 count of active customer-months in trailing window_months; params={'feature_set_version': 'v1.0'}                                       Count of active months in the trailing 12 calendar months. (default parameters).                      {"feature_set_version": "v1.0"}   feature_store\values\active_months_12m__v1.parquet          1
+  avg_monthly_spend        2 2026-10-11T01:00:39.773836+00:00   Average monthly spend over the trailing window_months calendar months.   data/transactions_monthly_agg.parquet:total_amount sum(total_amount over window_months) / window_months; params={'window_months': 12, 'feature_set_version': 'v1.0'}                             Widened to 12 months to smooth out seasonal spend swings the 6-month window over-weighted. {"feature_set_version": "v1.0", "window_months": 12}   feature_store\values\avg_monthly_spend__v2.parquet          1
+  avg_monthly_spend        1 2026-10-11T01:00:39.510274+00:00   Average monthly spend over the trailing window_months calendar months.   data/transactions_monthly_agg.parquet:total_amount  sum(total_amount over window_months) / window_months; params={'window_months': 6, 'feature_set_version': 'v1.0'}                                                                          Initial 6-month average monthly spend window.  {"feature_set_version": "v1.0", "window_months": 6}   feature_store\values\avg_monthly_spend__v1.parquet          0
+days_since_last_txn        1 2026-10-11T01:00:38.735246+00:00            Days from each customer's last transaction to the as-of date.      data/transactions.db:transactions.txn_timestamp                                       as_of - max(txn_timestamp), in days; params={'feature_set_version': 'v1.0'}                                    Days from each customer's last transaction to the as-of date. (default parameters).                      {"feature_set_version": "v1.0"} feature_store\values\days_since_last_txn__v1.parquet          1
+    return_rate_90d        1 2026-10-11T01:00:39.846978+00:00         Share of transactions that were returns in the trailing 90 days.        data/transactions.db:transactions.is_returned                         sum(is_returned) / count(*) over trailing 90 days; params={'feature_set_version': 'v1.0'}                                 Share of transactions that were returns in the trailing 90 days. (default parameters).                      {"feature_set_version": "v1.0"}     feature_store\values\return_rate_90d__v1.parquet          1
+       spend_recent        1 2026-10-11T01:00:39.332339+00:00 Sum of non-returned transaction amount in the trailing window_days days. data/transactions.db:transactions.amount,is_returned                 sum(amount where is_returned=0) over trailing window_days; params={'feature_set_version': 'v1.0'}                         Sum of non-returned transaction amount in the trailing window_days days. (default parameters).                      {"feature_set_version": "v1.0"}        feature_store\values\spend_recent__v1.parquet          1
+        tenure_days        1 2026-10-11T01:00:39.877181+00:00                                 Days from signup_date to the as-of date.                       data/customers.csv:signup_date                                              as_of - signup_date, in days; params={'feature_set_version': 'v1.0'}                                                         Days from signup_date to the as-of date. (default parameters).                      {"feature_set_version": "v1.0"}         feature_store\values\tenure_days__v1.parquet          1
+   txn_count_recent        3 2026-10-11T01:00:39.291341+00:00                 Number of transactions in the trailing window_days days.      data/transactions.db:transactions.txn_timestamp                    count(*) over trailing window_days; params={'window_days': 180, 'feature_set_version': 'v1.0'}     Widened to 180 days as a stability baseline capturing longer-term habits for comparison against the 30-day signal.  {"feature_set_version": "v1.0", "window_days": 180}    feature_store\values\txn_count_recent__v3.parquet          1
+   txn_count_recent        2 2026-10-11T01:00:39.114283+00:00                 Number of transactions in the trailing window_days days.      data/transactions.db:transactions.txn_timestamp                     count(*) over trailing window_days; params={'window_days': 30, 'feature_set_version': 'v1.0'} Shortened to 30 days after churn-window analysis showed recent disengagement is most predictive within a single month.   {"feature_set_version": "v1.0", "window_days": 30}    feature_store\values\txn_count_recent__v2.parquet          0
+   txn_count_recent        1 2026-10-11T01:00:38.893631+00:00                 Number of transactions in the trailing window_days days.      data/transactions.db:transactions.txn_timestamp                     count(*) over trailing window_days; params={'window_days': 90, 'feature_set_version': 'v1.0'}                                                     Initial 90-day frequency window as the default engagement horizon.   {"feature_set_version": "v1.0", "window_days": 90}    feature_store\values\txn_count_recent__v1.parquet          0
+
+--- is_latest per feature ---
+       feature_name  version                                         parquet_path
+  active_months_12m        1   feature_store\values\active_months_12m__v1.parquet
+  avg_monthly_spend        2   feature_store\values\avg_monthly_spend__v2.parquet
+days_since_last_txn        1 feature_store\values\days_since_last_txn__v1.parquet
+    return_rate_90d        1     feature_store\values\return_rate_90d__v1.parquet
+       spend_recent        1        feature_store\values\spend_recent__v1.parquet
+        tenure_days        1         feature_store\values\tenure_days__v1.parquet
+   txn_count_recent        3    feature_store\values\txn_count_recent__v3.parquet
+
+--- version count per feature ---
+feature_name
+active_months_12m      1
+avg_monthly_spend      2
+days_since_last_txn    1
+return_rate_90d        1
+spend_recent           1
+tenure_days            1
+txn_count_recent       3
+
+[exit 0]

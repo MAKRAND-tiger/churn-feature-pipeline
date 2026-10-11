@@ -1,0 +1,16 @@
+$ "C:\Stack_AI_Rewire\Assignment_1\.venv\Scripts\python.exe" _parity_mutation.py
+
+# Parity mutation check
+Per skill.md Step 2.1: deliberately reintroduce a training/scoring divergence in a scratch copy and confirm the parity test catches it.
+
+## Result
+- Customer tested: 751 (mid-base).
+- Divergence injected: scoring path used txn_count_recent window_days=30 while training path used window_days=90.
+- Features where train != score (divergence detected): ['txn_count_recent']
+- test_parity.py assertion (`assert tv == sv`) would therefore FAIL on the divergent feature. **The parity test catches the deliberately introduced train/score split.**
+
+## Conclusion
+PARITY TEST IS LOAD-BEARING: a real train/score divergence is detected. The single-code-path build_features is restored (the scratch copy is removed) and the real test suite passes.
+
+
+[exit 0]

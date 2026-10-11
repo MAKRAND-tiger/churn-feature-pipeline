@@ -1,0 +1,64 @@
+$ "C:\Stack_AI_Rewire\Assignment_1\.venv\Scripts\python.exe" -m pytest -v
+
+============================= test session starts =============================
+platform win32 -- Python 3.11.3, pytest-9.1.1, pluggy-1.6.0 -- C:\Stack_AI_Rewire\Assignment_1\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Stack_AI_Rewire\Assignment_1\assignment\starter-code
+configfile: pytest.ini
+collecting ... collected 51 items
+
+tests/test_feature_store.py::test_register_and_retrieve_all_versions_of_a_versioned_feature PASSED [  1%]
+tests/test_feature_store.py::test_is_latest_points_to_highest_version_not_an_earlier_one PASSED [  3%]
+tests/test_feature_store.py::test_list_versions_returns_distinct_parquet_paths_that_exist PASSED [  5%]
+tests/test_feature_store.py::test_registering_new_version_does_not_overwrite_existing_file PASSED [  7%]
+tests/test_feature_store.py::test_parameters_are_json_round_tripped PASSED [  9%]
+tests/test_feature_store.py::test_re_registering_same_parameters_is_idempotent PASSED [ 11%]
+tests/test_feature_store.py::test_re_registering_then_adding_new_version_keeps_highest_latest PASSED [ 13%]
+tests/test_parity.py::test_training_and_scoring_paths_agree_for_same_customer PASSED [ 15%]
+tests/test_parity.py::test_training_and_scoring_agree_for_a_zero_activity_customer PASSED [ 17%]
+tests/test_parity.py::test_scoring_multiple_customers_matches_training_for_those_ids PASSED [ 19%]
+tests/test_quality_checks.py::test_null_check_fires_on_injected_null PASSED [ 21%]
+tests/test_quality_checks.py::test_null_check_does_not_fire_on_clean_input PASSED [ 23%]
+tests/test_quality_checks.py::test_zero_activity_default_check_fires_on_nan_recency PASSED [ 25%]
+tests/test_quality_checks.py::test_zero_activity_default_check_passes_on_sentinel PASSED [ 27%]
+tests/test_quality_checks.py::test_outlier_check_fires_on_out_of_range_value PASSED [ 29%]
+tests/test_quality_checks.py::test_outlier_check_fires_on_return_rate_above_one PASSED [ 31%]
+tests/test_quality_checks.py::test_outlier_check_does_not_fire_on_clean_input PASSED [ 33%]
+tests/test_quality_checks.py::test_drift_check_fires_on_shifted_distribution PASSED [ 35%]
+tests/test_quality_checks.py::test_drift_check_passes_with_no_reference PASSED [ 37%]
+tests/test_quality_checks.py::test_drift_check_passes_on_clean_input PASSED [ 39%]
+tests/test_quality_checks.py::test_row_count_check_fires_on_mismatch PASSED [ 41%]
+tests/test_quality_checks.py::test_row_count_check_passes_on_match PASSED [ 43%]
+tests/test_quality_checks.py::test_run_all_checks_raises_on_failure PASSED [ 45%]
+tests/test_quality_checks.py::test_run_all_checks_passes_on_clean PASSED [ 47%]
+tests/test_transforms.py::test_recency_normal_case PASSED                [ 49%]
+tests/test_transforms.py::test_recency_zero_activity_returns_sentinel_not_nan PASSED [ 50%]
+tests/test_transforms.py::test_recency_single_record PASSED              [ 52%]
+tests/test_transforms.py::test_recency_uses_only_on_or_before_as_of_no_leakage PASSED [ 54%]
+tests/test_transforms.py::test_txn_count_normal_case PASSED              [ 56%]
+tests/test_transforms.py::test_txn_count_zero_activity_returns_zero_not_nan PASSED [ 58%]
+tests/test_transforms.py::test_txn_count_single_record PASSED            [ 60%]
+tests/test_transforms.py::test_txn_count_time_window_boundary_inclusive_of_as_of PASSED [ 62%]
+tests/test_transforms.py::test_txn_count_versioning_param_changes_value PASSED [ 64%]
+tests/test_transforms.py::test_spend_normal_case_excludes_returns PASSED [ 66%]
+tests/test_transforms.py::test_spend_zero_activity_returns_zero_not_nan PASSED [ 68%]
+tests/test_transforms.py::test_spend_single_record PASSED                [ 70%]
+tests/test_transforms.py::test_spend_time_window_boundary PASSED         [ 72%]
+tests/test_transforms.py::test_avg_monthly_spend_normal_case PASSED      [ 74%]
+tests/test_transforms.py::test_avg_monthly_spend_zero_activity_returns_zero PASSED [ 76%]
+tests/test_transforms.py::test_avg_monthly_spend_versioning_window_months_changes_value PASSED [ 78%]
+tests/test_transforms.py::test_avg_monthly_spend_excludes_future_months PASSED [ 80%]
+tests/test_transforms.py::test_active_months_normal_case PASSED          [ 82%]
+tests/test_transforms.py::test_active_months_window_boundary PASSED      [ 84%]
+tests/test_transforms.py::test_active_months_zero_activity PASSED        [ 86%]
+tests/test_transforms.py::test_active_months_single_record PASSED        [ 88%]
+tests/test_transforms.py::test_return_rate_normal_case PASSED            [ 90%]
+tests/test_transforms.py::test_return_rate_zero_activity_returns_zero_not_nan PASSED [ 92%]
+tests/test_transforms.py::test_return_rate_single_record_returned PASSED [ 94%]
+tests/test_transforms.py::test_return_rate_in_bounds_zero_to_one PASSED  [ 96%]
+tests/test_transforms.py::test_tenure_normal_case PASSED                 [ 98%]
+tests/test_transforms.py::test_tenure_zero_case_signup_on_as_of PASSED   [100%]
+
+============================= 51 passed in 4.09s ==============================
+
+[exit 0]

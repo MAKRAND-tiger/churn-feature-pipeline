@@ -1,0 +1,5 @@
+$ "C:\Stack_AI_Rewire\Assignment_1\.venv\Scripts\python.exe" scripts/compare_feature_versions.py
+
+Wrote outputs/artifacts/VERSION_COMPARISON.md
+
+[exit 0]
