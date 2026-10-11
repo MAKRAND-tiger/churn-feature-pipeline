@@ -1,0 +1,25 @@
+$ "C:\Stack_AI_Rewire\Assignment_1\.venv\Scripts\python.exe" scripts/build_training_features.py --as-of 2026-08-01
+
+Building training features as of 2026-08-01 ...
+Quality-check summary:
+  - no_unexpected_nulls: PASS — no unexpected nulls
+  - zero_activity_defaults: PASS — zero-activity defaults applied
+  - outliers: PASS — all features within sane bounds
+  - drift: PASS — no reference snapshot supplied — drift check skipped
+  - row_count: PASS — row count 1500 == expected 1500
+Wrote feature snapshot for 1500 customers to outputs\features_train.parquet
+  registered days_since_last_txn v1 -> feature_store/values/days_since_last_txn__v1.parquet
+  registered txn_count_recent v1 (window_days=90) -> feature_store/values/txn_count_recent__v1.parquet
+  registered txn_count_recent v2 (window_days=30) -> feature_store/values/txn_count_recent__v2.parquet
+  registered txn_count_recent v3 (window_days=180) -> feature_store/values/txn_count_recent__v3.parquet
+  registered spend_recent v1 -> feature_store/values/spend_recent__v1.parquet
+  registered avg_monthly_spend v1 (window_months=6) -> feature_store/values/avg_monthly_spend__v1.parquet
+  registered avg_monthly_spend v2 (window_months=12) -> feature_store/values/avg_monthly_spend__v2.parquet
+  registered active_months_12m v1 -> feature_store/values/active_months_12m__v1.parquet
+  registered return_rate_90d v1 -> feature_store/values/return_rate_90d__v1.parquet
+  registered tenure_days v1 -> feature_store/values/tenure_days__v1.parquet
+
+Done. Feature store populated.
+Wrote outputs/artifacts/FEATURE_LINEAGE.md
+
+[exit 0]

@@ -1,0 +1,5 @@
+$ "C:\Stack_AI_Rewire\Assignment_1\.venv\Scripts\python.exe" scripts/generate_lineage.py
+
+Wrote outputs/artifacts/FEATURE_LINEAGE.md
+
+[exit 0]
